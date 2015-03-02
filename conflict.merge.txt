@@ -1,0 +1,6 @@
+<<<<<<< HEAD
+print("CONFLICTS!")
+=======
+print("No functionality!")
+>>>>>>> LabBranch
+
