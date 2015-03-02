@@ -1,2 +1,1 @@
-print("CONFLICTS!")
-
+print("Conflict fixed")
