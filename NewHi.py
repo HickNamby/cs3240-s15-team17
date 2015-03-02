@@ -1,2 +1,2 @@
-print("New functionality!")
+print("No functionality!")
 
