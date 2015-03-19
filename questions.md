@@ -13,3 +13,8 @@ Is there a size limitation on the decryption program?
 Can users add and/or remove themselves from groups? Or is this exlusively an admin permission?
 
 Is there a user search function? Any way for users to communicate over the site?
+
+Do users need authorization/an account to use the client side application?
+
+Can users customize their level of encryption?
+
