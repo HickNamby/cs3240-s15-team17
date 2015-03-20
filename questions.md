@@ -26,4 +26,3 @@ Is there a user search function? Any way for users to communicate over the site?
 Do users need authorization/an account to use the client side application?
 
 Can users customize their level of encryption?
-
