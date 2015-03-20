@@ -2,13 +2,10 @@
 
 ##Team 17
 
-Nick Hamby, nch3vc
-
-Yuhuai Liu, yl3ak
-
-Seamus Lowry, spl6yc
-
-Ronnie Smith, rls8ru
+Nick Hamby, nch3vc\n
+Yuhuai Liu, yl3ak\n
+Seamus Lowry, spl6yc\n
+Ronnie Smith, rls8ru\n
 
 ##Questions
 
