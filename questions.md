@@ -1,5 +1,14 @@
 # Questions from Team 17
 
+##Team 17
+
+Nick Hamby, nch3vc
+Yuhuai Liu, yl3ak
+Seamus Lowry, spl6yc
+Ronnie Smith, rls8ru
+
+##Questions
+
 For decryption, is the system responsible for storing keys, or are the users sharing that information somehow?
 
 How exactly is a report formatted?  What field are available? What fields are required?
