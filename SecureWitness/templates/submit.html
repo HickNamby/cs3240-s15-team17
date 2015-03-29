@@ -1,9 +1,53 @@
+<!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8">
+		<title>Submit Your Report</title>	
+	</head>
+
+<!-- 	<body>
+		List of uploaded documents
+		{% if documents %}
+			<ul>
+			{% for document in documents %}
+				<li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No documents.</p>
+		{% endif %} -->
+
+		<!-- Upload form. Note enctype attribute! -->
+		<form action="{% url "SecureWitness.views.submit" %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{{ form.non_field_errors }}</p>
+			<p>{{ form.reporter.label_tag }} {{ form.reporter.help_text }}</p>
+			<p>
+				{{ form.reporter.errors }}
+				{{ form.reporter }}
+			</p>
+			<p>{{ form.title.label_tag }} {{ form.title.help_text }}</p>
+			<p>
+				{{ form.title.errors }}
+				{{ form.title }}
+				
+			</p>
+			<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+			<p>
+				{{ form.docfile.errors }}
+				{{ form.docfile }}
+			</p>
+			<p><input type="submit" value="Upload" /></p>
+		</form>
+	</body>
+</html> 
+
+<!-- <html>
 <h1>
-    Submit some sketchy stuff
+    Submit your Report
 </h1>
 <form>
-    File Name:<br>
+    Re Name:<br>
     <input type="text" name="nickname">
     <br>
     Description:<br>
@@ -14,4 +58,4 @@
 
 </form>
 
-</html>
+</html> -->

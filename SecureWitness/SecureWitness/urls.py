@@ -7,6 +7,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^submit/', 'SecureWitness.views.submit'),
     url(r'^index/', 'SecureWitness.views.index'),
+    url(r'^submitted/', 'SecureWitness.views.submitted'),
+    url(r'^list', 'SecureWitness.views.list'),
     url(r'^', 'SecureWitness.views.home'),
 
 

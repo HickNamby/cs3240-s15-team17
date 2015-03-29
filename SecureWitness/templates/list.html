@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Reports Submitted</title>	
+	</head>
+
+ 	<body>
+		<!--List of uploaded documents-->
+		{% if reports %}
+			<ul>
+			{% for report in reports %}
+				<li> {{ report.header }} <br> <a href="{{ report.docfile.url }}">{{ report.docfile.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No reports submitted.</p>
+		{% endif %}
+	</body>
+</html>
