@@ -1,8 +1,26 @@
+{% load staticfiles %}
 <html>
-<H1>
+<head>
+<title>Secure Witness</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<H1><div id="header">
 Home Page For Secure Witness
+</div>
 </H1>
-Add:
-Title, login, password, top bar to page, submit a report button
-<br> <a href="{% url 'SecureWitness.views.submit' %}">Click here</a> to Submit a File:
+<p>
+<text>
+<div id="nav">
+<a href="{% url 'SecureWitness.views.submit' %}">Upload</a><br><br>
+<a href="">Login</a><br>
+
+</div>
+<div id="main">
+Secure Witness is a confidential, easy to use application for the uploading and storage of 
+sensitive information.
+</div>
+</text>
+</body>
 </html>

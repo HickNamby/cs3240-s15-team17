@@ -1,0 +1,52 @@
+body {
+background-color: #66CCFF;
+
+}
+
+h1 {
+font-family: arial;
+font-weight: 100;
+color: #FFFFFF;
+text-align: center;
+}
+
+normal {
+font-family: times;
+font-size: 16;
+}
+<style>
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#main{
+background-color:#FFFFFF;
+height:500px;
+text-align:center;
+font-size:25;
+}
+#nav {
+    font-size:16;
+    text-align:center;
+    line-height:30px;
+    background-color:black;
+    width:100px;
+    height:500px;
+    float:left;
+    padding:5px; 
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px; 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+</style>
