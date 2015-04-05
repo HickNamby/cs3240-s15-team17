@@ -5,8 +5,8 @@
 		<title>Submit Your Report</title>	
 	</head>
 
-<!-- 	<body>
-		List of uploaded documents
+	<body>
+<!--		List of uploaded documents
 		{% if documents %}
 			<ul>
 			{% for document in documents %}
@@ -20,23 +20,31 @@
 		<!-- Upload form. Note enctype attribute! -->
 		<form action="{% url "SecureWitness.views.submit" %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
-			<p>{{ form.non_field_errors }}</p>
-			<p>{{ form.reporter.label_tag }} {{ form.reporter.help_text }}</p>
+			<p>{{form.errors}} </p>
 			<p>
-				{{ form.reporter.errors }}
-				{{ form.reporter }}
+				{{ form.reporter.label_tag }} {{ form.reporter }} {{ form.reporter.help_text }} {{ form.reporter.errors }}
 			</p>
-			<p>{{ form.title.label_tag }} {{ form.title.help_text }}</p>
 			<p>
-				{{ form.title.errors }}
-				{{ form.title }}
-				
+				{{ form.short_des.label_tag }} {{ form.short_des }} {{ form.short_des.help_text }} {{ form.short_des.errors }}
+			</p>
+			<p>{{ form.long_des.label_tag }} {{ form.long_des.help_text }}</p>
+			<p>
+				{{ form.long_des.errors }}
+				{{ form.long_des }}
+			</p>
+			<p>
+				{{ form.location.label_tag }} {{ form.location }} {{ form.location.help_text }} {{ form.location.errors }}
+			</p>
+			<p>
+				{{ form.date.label_tag }} {{ form.date }} {{ form.date.help_text }} {{ form.date.errors }}
 			</p>
 			<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
 			<p>
 				{{ form.docfile.errors }}
 				{{ form.docfile }}
 			</p>
+			<p>{{ form.encrypt_file.label_tag }} {{ form.encrypt_file.help_text }} {{ form.encrypt_file }} {{ form.encrypt_file.errors }}</p>
+			<p>{{ form.public.label_tag }} {{ form.public.help_text }} {{ form.public }} {{ form.public.errors }}</p>
 			<p><input type="submit" value="Upload" /></p>
 		</form>
 	</body>
