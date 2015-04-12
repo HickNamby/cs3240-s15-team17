@@ -9,8 +9,8 @@
 		<!--List of uploaded documents-->
 		{% if reports %}
 			<ul>
-			{% for report, files in repDict.items %}
-				<li> <a href = "{% url 'SecureWitness.views.report_view' report_id=report.id %}"> {{ report.header }}</a> <br>
+			{% for report, files in rep_dict.items %}
+				<li> <a href = "{% url 'SecureWitness.views.report_view' report_id=report.id%}"> {{ report.header }}</a> <br>
 					<ul>
 					{% for file in files %}
 					<li>
