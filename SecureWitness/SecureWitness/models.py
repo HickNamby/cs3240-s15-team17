@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.signals import pre_delete,post_delete
 from django.dispatch.dispatcher import receiver
+from django.contrib.auth.models import User
+
 import os
 
 class Report(models.Model):

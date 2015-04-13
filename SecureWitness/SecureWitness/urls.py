@@ -10,5 +10,7 @@ urlpatterns = patterns('',
     url(r'^submitted/', 'SecureWitness.views.submitted'),
 	url(r'^report/(?P<report_id>\d+)(?:/(?P<file_id>\d+))?/?$', 'SecureWitness.views.report_view'),
     url(r'^list', 'SecureWitness.views.list'),
+    url(r'^register/$', 'SecureWitness.views.register'),
+    url(r'^login/$', 'SecureWitness.views.user_login'),
     url(r'^', 'SecureWitness.views.home'),
 )

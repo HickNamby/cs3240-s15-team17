@@ -1,5 +1,6 @@
 from django import forms
 import datetime
+from django.contrib.auth.models import User
 
 class ReportForm(forms.Form):
 	reporter = forms.CharField(label='Your name', max_length=50)
@@ -10,3 +11,10 @@ class ReportForm(forms.Form):
 	public = forms.BooleanField(label='Public',widget=forms.CheckboxInput,required=False,initial=False)
 	docfile = forms.FileField(label='Select a file', required=False)
 	encrypt_file = forms.BooleanField(label='Encrypt File(s)',widget=forms.CheckboxInput, required=False,initial=False)
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
