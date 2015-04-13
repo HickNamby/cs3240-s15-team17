@@ -22,13 +22,12 @@ def submit(request):
 	if request.method == 'POST':
 		form = ReportForm(request.POST, request.FILES)
 		if form.is_valid():
-			print("form is valid")
 			newRep = Report(reporter = request.POST['reporter'], short_des = request.POST['short_des'], long_des = request.POST['long_des'], location = request.POST['location'], incident_date = request.POST['date'],public = request.POST.get('public',False))
 			newRep.save()
-			print (request.FILES)
-			if request.FILES.get('docfile',False):
-				newRep.file_set.create(encrypt_file = request.POST.get('encrypt_file',False),docfile = request.FILES['docfile'])
-				newRep.save()
+			if request.FILES:
+				for f in request.FILES.getlist('docfiles'):
+					newRep.file_set.create(encrypt_file = request.POST.get('encrypt_file',False),docfile = f)
+					newRep.save()
 			return redirect('SecureWitness.views.submitted')
 	else:
 		form = ReportForm()

@@ -18,7 +18,7 @@
  			<ul>
 			{% for file, loc in file_dict.items %}
 				<li>
-				<a href="{% url 'SecureWitness.views.report_view' report_id=report.id file_id=file.id %}"> {{ file.report.short_des }} </a>
+				<a href="{% url 'SecureWitness.views.report_view' report_id=report.id file_id=file.id %}"> File #{{ forloop.counter }} </a>
 				</li>
 			{% endfor %}
 			</ul>
