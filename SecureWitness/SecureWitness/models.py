@@ -19,7 +19,6 @@ class Report(models.Model):
 
 class File(models.Model):
 	report = models.ForeignKey(Report)
-	encrypt_file = models.BooleanField(default=False)
 	docfile = models.FileField(upload_to='documents/')
 	def __str__(self):
 		return self.docfile.url

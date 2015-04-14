@@ -38,8 +38,7 @@
 			<p>
 				{{ form.date.label_tag }} {{ form.date }} {{ form.date.help_text }} {{ form.date.errors }}
 			</p>
-			<p><input type="file" name="docfiles" multiple/></p>
-			<p>{{ form.encrypt_file.label_tag }} {{ form.encrypt_file.help_text }} {{ form.encrypt_file }} {{ form.encrypt_file.errors }}</p>
+			<p>Select a file or set of files: <input type="file" name="docfiles" multiple/></p>
 			<p>{{ form.public.label_tag }} {{ form.public.help_text }} {{ form.public }} {{ form.public.errors }}</p>
 			<p><input type="submit" value="Upload" /></p>
 		</form>

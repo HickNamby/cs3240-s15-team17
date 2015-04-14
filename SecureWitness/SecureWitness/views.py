@@ -26,7 +26,7 @@ def submit(request):
 			newRep.save()
 			if request.FILES:
 				for f in request.FILES.getlist('docfiles'):
-					newRep.file_set.create(encrypt_file = request.POST.get('encrypt_file',False),docfile = f)
+					newRep.file_set.create(docfile=f)
 					newRep.save()
 			return redirect('SecureWitness.views.submitted')
 	else:
@@ -52,12 +52,13 @@ def report_view(request, report_id, file_id=-1):
 		report.delete()
 		return redirect('SecureWitness.views.list')
 	if file_id:
-		file = get_object_or_404(File,pk=file_id)
-		response = HttpResponse(file.docfile,content_type='application/force-download')
-		response['Content-Disposition']='attachment; filename=%s' % str(file.report.short_des)
+		f = get_object_or_404(File,pk=file_id)
+		response = HttpResponse(f.docfile,content_type='application/force-download')
+		display = f.docfile.url.split('/')[-1]
+		response['Content-Disposition']='attachment; filename=%s' % str(display)
 		return response
-	for file in report.file_set.all():
-		file_dict[file] = os.path.abspath(file.docfile.url)
+	for f in report.file_set.all():
+		file_dict[f] = f.docfile.url.split('/')[-1]
 	return render(request, 'report.html', {'report':report,'file_dict':file_dict})
 
 def submitted(request):

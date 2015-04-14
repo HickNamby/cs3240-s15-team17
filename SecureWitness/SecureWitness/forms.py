@@ -9,8 +9,6 @@ class ReportForm(forms.Form):
 	location = forms.CharField(label='Location', required=False)
 	date = forms.DateField(label='Date of Occurrence',initial=datetime.date.today,required=False)
 	public = forms.BooleanField(label='Public',widget=forms.CheckboxInput,required=False,initial=False)
-	docfile = forms.FileField(label='Select a file', required=False)
-	encrypt_file = forms.BooleanField(label='Encrypt File(s)',widget=forms.CheckboxInput, required=False,initial=False)
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
