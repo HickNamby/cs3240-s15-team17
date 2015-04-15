@@ -2,13 +2,13 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>{{report.title}}</title>	
+		<title>{{report.short_des}}</title>	
 	</head>
 
  	<body>
 		<!--List of uploaded documents-->
 		{% if report %}
-			<p> Submitted: {{ report.timestamp }} by {{ report.reporter }} </p>
+			<p> Submitted: {{ report.timestamp }} by {{ report.owner.username }} </p>
 			{% if report.indicent_date %}
 				<p> Incident Date: {{ report.incident_date }} </p>
 			{% endif %}

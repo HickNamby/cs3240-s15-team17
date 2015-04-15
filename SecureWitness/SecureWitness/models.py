@@ -5,17 +5,23 @@ from django.contrib.auth.models import User
 
 import os
 
+
+class Folder(models.Model):
+	owner = models.ForeignKey(User, editable=False)
+	title = models.CharField(max_length=50)
+	ofolder = models.ManyToManyField('self')
+
 class Report(models.Model):
-	reporter = models.CharField(max_length=50)
+	owner = models.ForeignKey(User, editable=False)
 	short_des = models.CharField(max_length=50)
 	long_des = models.TextField()
 	location = models.CharField(max_length=50)
 	incident_date = models.DateTimeField()
 	timestamp = models.DateTimeField(auto_now_add=True)
 	public = models.BooleanField(default=True)
-	#keywords (how????)
+	folder = models.ManyToManyField(Folder)
 	def header(self):
-		return self.reporter + " " + self.short_des + " " + self.long_des + " " + self.location + " " + str(self.incident_date) + " " + str(self.timestamp) + " " + str(self.public)
+		return self.owner.username + " " + self.short_des + " " + self.long_des + " " + self.location + " " + str(self.incident_date) + " " + str(self.timestamp) + " " + str(self.public)
 
 class File(models.Model):
 	report = models.ForeignKey(Report)

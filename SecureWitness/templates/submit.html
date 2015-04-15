@@ -22,9 +22,6 @@
 			{% csrf_token %}
 			<p>{{form.errors}} </p>
 			<p>
-				{{ form.reporter.label_tag }} {{ form.reporter }} {{ form.reporter.help_text }} {{ form.reporter.errors }}
-			</p>
-			<p>
 				{{ form.short_des.label_tag }} {{ form.short_des }} {{ form.short_des.help_text }} {{ form.short_des.errors }}
 			</p>
 			<p>{{ form.long_des.label_tag }} {{ form.long_des.help_text }}</p>
