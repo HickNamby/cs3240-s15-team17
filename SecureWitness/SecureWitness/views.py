@@ -74,6 +74,56 @@ def createfolder(request):
 	return render(request,'createfolder.html',{'form':form,'reports':reports,'folders':folders})
 
 @login_required
+def editreport(request,report_id):
+	report = Report.objects.get(pk=report_id)
+	if request.method=="POST":
+		form = ReportForm(request.POST, request.FILES)
+		if form.is_valid():
+			report.file_set.all().delete()
+			report.short_des=request.POST['short_des']
+			report.long_des=request.POST['long_des']
+			report.location=request.POST['location']
+			report.incident_date=request.POST['date']
+			report.public=request.POST.get('public',False)
+			report.save()
+			if request.FILES:
+				for f in request.FILES.getlist('docfiles'):
+					report.file_set.create(docfile=f)
+					report.save()
+			return redirect('SecureWitness.views.profile')
+	else:
+		form = ReportForm(initial={'short_des':report.short_des,'long_des':report.long_des,'location':report.location,'date':report.incident_date,'public':report.public})
+	context={'report':report,'form':form}
+	return render(request,'editreport.html',context)
+
+
+@login_required
+def editfolder(request,folder_id):
+	fol = Folder.objects.get(pk=folder_id)
+	if request.method=="POST":
+		for report in Report.objects.filter(owner=request.user):
+			if ('r_'+str(report.id)) in request.POST:
+				report.folder.add(fol)
+			else:
+				report.folder.remove(fol)
+			report.save()
+			fol.save()
+		for fold in Folder.objects.filter(owner=request.user):
+			if ('f_'+str(fold.id)) in request.POST:
+				fold.ofolder.add(fol)
+			else:
+				fold.ofolder.remove(fol)
+			fold.save()
+			fol.save()
+		return redirect('SecureWitness.views.profile')
+	reports = Report.objects.filter(owner=request.user)
+	rep_set = fol.report_set.all()
+	folders = Folder.objects.filter(owner=request.user)
+	fol_set = fol.ofolder.all()
+	context = {'folder':fol,'reports':reports,'rep_set':rep_set,'folders':folders,'fol_set':fol_set}
+	return render(request,'editfolder.html',context)
+
+@login_required
 def report_view(request, report_id, file_id=-1):
 	report = get_object_or_404(Report,pk=report_id)
 	file_dict = {}

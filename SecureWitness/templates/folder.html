@@ -31,10 +31,11 @@
 			{% if not fol_dict and not rep_dict %}
 				<p>There are no elements in this folder.</p>
 			{% endif %}
+			<a href="{% url 'SecureWitness.views.editfolder' folder_id=folder.id %}"><button>Edit?</button></a><br><br>
 			<form action="{% url 'SecureWitness.views.folder_view' folder_id=folder.id%}" method="post">
 				{% csrf_token %}
 				<input type="submit" value = "Delete?" />
-			</form>
+			</form><br>
 		{% else %}
 			<p> That is not a valid folder.</p>
 		{% endif %}
