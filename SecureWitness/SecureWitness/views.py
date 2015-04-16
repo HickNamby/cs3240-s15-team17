@@ -172,6 +172,7 @@ def register(request):
             registered = True
         else:
             print(user_form.errors)
+        return redirect('SecureWitness.views.user_login')
     else:
         user_form = UserForm()
 
