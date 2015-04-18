@@ -1,6 +1,5 @@
 from django import forms
 import datetime
-from django.contrib.auth.models import User
 
 class ReportForm(forms.Form):
 	short_des = forms.CharField(label='Summary', max_length=50)
@@ -12,9 +11,7 @@ class ReportForm(forms.Form):
 class FolderForm(forms.Form):
 	title = forms.CharField(label='Folder Name:',max_length=50)
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
+class UserForm(forms.Form):
+	username = forms.CharField(max_length=50)
+	email = forms.CharField(max_length=50)
+	password = forms.CharField(widget=forms.PasswordInput())

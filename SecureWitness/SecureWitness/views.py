@@ -3,8 +3,9 @@ from django.shortcuts import render_to_response, render, redirect, get_object_or
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from SecureWitness.forms import UserForm, User, FolderForm
+from SecureWitness.forms import UserForm, FolderForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import os
 
@@ -166,8 +167,7 @@ def register(request):
         user_form = UserForm(data=request.POST)
 
         if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
+            user = User.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
             user.save()
             registered = True
         else:
