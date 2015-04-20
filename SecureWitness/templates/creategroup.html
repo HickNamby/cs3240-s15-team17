@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SecureWitness</title>
+    </head>
+
+    <body>
+        <h1>Create Group</h1>
+
+        <form id="group_form" method="post" action="/creategroup/">
+            {% csrf_token %}
+            name: <input type="text" name="name" value="" size="50" />
+            <br />
+
+            <input type="submit" value="submit" />
+        </form>
+
+    </body>
+</html>
