@@ -36,7 +36,7 @@ class SiteUser(AbstractBaseUser, PermissionsMixin):
 
     objects = SiteUserManager()
     USERNAME_FIELD = 'username'
-
+    REQUIRED_FIELDS = ['email']
 
     def get_full_name(self):
         # The user is identified by their email address
