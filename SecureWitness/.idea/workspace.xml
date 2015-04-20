@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c3c01901-daf4-4781-88e7-d498e4c7aa1a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/creategroup.html" afterPath="$PROJECT_DIR$/templates/creategroup.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SecureWitness/views.py" afterPath="$PROJECT_DIR$/SecureWitness/views.py" />
     </list>
     <ignored path="SecureWitness.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -121,11 +122,9 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SecureWitness/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3270">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="212" selection-end-column="75" />
-              <folding>
-                <element signature="e#20#104#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.39473686" vertical-offset="0" max-vertical-offset="3360">
+              <caret line="10" column="53" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -158,9 +157,9 @@
         <option value="$PROJECT_DIR$/SecureWitness/forms.py" />
         <option value="$PROJECT_DIR$/templates/creategroup.html" />
         <option value="$PROJECT_DIR$/SecureWitness/urls.py" />
-        <option value="$PROJECT_DIR$/SecureWitness/views.py" />
         <option value="$PROJECT_DIR$/templates/home.html" />
         <option value="$PROJECT_DIR$/SecureWitness/admin.py" />
+        <option value="$PROJECT_DIR$/SecureWitness/views.py" />
       </list>
     </option>
   </component>
@@ -618,9 +617,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="3015">
           <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
-          <folding>
-            <element signature="e#20#104#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -694,9 +691,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="885">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#20#104#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -754,9 +749,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="272">
           <caret line="10" column="30" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
-          <folding>
-            <element signature="e#20#104#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -946,11 +939,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SecureWitness/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3270">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="212" selection-end-column="75" />
-          <folding>
-            <element signature="e#20#104#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.39473686" vertical-offset="0" max-vertical-offset="3360">
+          <caret line="10" column="53" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>

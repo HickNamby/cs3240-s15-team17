@@ -8,6 +8,7 @@ from SecureWitness.forms import UserForm, FolderForm, GroupForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.template.response import TemplateResponse
 import os
 
 from SecureWitness.models import Report, File, Folder
@@ -48,8 +49,12 @@ def profile(request):
 	for report in reports:
 		rep_dict[report]= report.file_set.all()
 	folders = Folder.objects.filter(owner=request.user)
-	return render(request, 'profile.html', {'reports':reports,'rep_dict':rep_dict,'folders':folders})
+	return render(request, 'profile.html', {'reports':reports,'rep_dict':rep_dict,'folders':folders},context_instance=RequestContext(request))
 
+def custom_proc(request):
+    return {
+        'dictionary': request.reports
+    }
 @login_required
 def createfolder(request):
 	if request.method == 'POST':
