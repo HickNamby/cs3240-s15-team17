@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Edit Your Report</title>	
+	</head>
+
+	<body>
+<!--		List of uploaded documents
+		{% if documents %}
+			<ul>
+			{% for document in documents %}
+				<li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No documents.</p>
+		{% endif %} -->
+
+		<!-- Upload form. Note enctype attribute! -->
+		<form action="{% url 'SecureWitness.views.editreport' report_id=report.id %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{{form.errors}} </p>
+			<p>
+				{{ form.short_des.label_tag }} {{ form.short_des }} {{ form.short_des.help_text }} {{ form.short_des.errors }}
+			</p>
+			<p>{{ form.long_des.label_tag }} {{ form.long_des.help_text }}</p>
+			<p>
+				{{ form.long_des.errors }}
+				{{ form.long_des }}
+			</p>
+			<p>
+				{{ form.location.label_tag }} {{ form.location }} {{ form.location.help_text }} {{ form.location.errors }}
+			</p>
+			<p>
+				{{ form.date.label_tag }} {{ form.date }} {{ form.date.help_text }} {{ form.date.errors }}
+			</p>
+			<p>Select a file or set of files: <input type="file" name="docfiles" multiple/></p>
+			<p>{{ form.public.label_tag }} {{ form.public.help_text }} {{ form.public }} {{ form.public.errors }}</p>
+			<p><input type="submit" value="Finish" /></p>
+		</form>
+	</body>
+</html> 
