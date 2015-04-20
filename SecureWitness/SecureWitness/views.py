@@ -3,10 +3,11 @@ from django.shortcuts import render_to_response, render, redirect, get_object_or
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from SecureWitness.forms import UserForm, FolderForm
+from SecureWitness.models import SiteUser
+from SecureWitness.forms import UserForm, FolderForm, GroupForm
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 import os
 
 from SecureWitness.models import Report, File, Folder
@@ -167,7 +168,7 @@ def register(request):
         user_form = UserForm(data=request.POST)
 
         if user_form.is_valid():
-            user = User.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
+            user = SiteUser.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
             user.save()
             registered = True
         else:
@@ -194,3 +195,19 @@ def user_login(request):
             return HttpResponse("Login failed")
     else:
         return render(request, 'login.html', {})
+
+@login_required()
+def create_group(request):
+    if request.method == 'POST':
+        group_form = GroupForm(data=request.POST)
+
+        if group_form.is_valid():
+            group = Group.objects.get_or_create(name=request.POST.get('name'))
+
+        else:
+            print(group_form.errors)
+        return redirect('SecureWitness.views.home')
+    else:
+        group_form = GroupForm()
+
+    return render(request, 'creategroup.html', {'group_from' : group_form})

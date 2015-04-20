@@ -1,5 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+
+from admin import user_admin
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'SecureWitness.views.home', name='home'),
@@ -16,5 +19,7 @@ urlpatterns = patterns('',
     url(r'^editreport/(?P<report_id>\d+)/$', 'SecureWitness.views.editreport'),
     url(r'^register/$', 'SecureWitness.views.register'),
     url(r'^login/$', 'SecureWitness.views.user_login'),
+    url(r'^useradmin/',include(user_admin.urls)),
+    url(r'^creategroup/$','SecureWitness.views.create_group'),
     url(r'^', 'SecureWitness.views.home'),
 )

@@ -13,5 +13,8 @@ class FolderForm(forms.Form):
 
 class UserForm(forms.Form):
 	username = forms.CharField(max_length=50)
-	email = forms.CharField(max_length=50)
+	email = forms.EmailField(max_length=50)
 	password = forms.CharField(widget=forms.PasswordInput())
+
+class GroupForm(forms.Form):
+    name = forms.CharField(max_length=50)
