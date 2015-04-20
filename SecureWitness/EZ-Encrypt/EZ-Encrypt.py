@@ -5,9 +5,15 @@ from Crypto.Cipher import AES
 import hashlib
 from FileEncrypter import encrypt_file
 from FileEncrypter import decrypt_file
+from django.shortcuts import render_to_response, render, redirect, get_object_or_404
+from django.template import RequestContext
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from django.template.response import TemplateResponse
+import requests
 
 msg1="Would You Like to Encrypt or Decrypt a File?"
-choices1=["Encrypt", "Decrypt"]
+choices1=["Encrypt", "Decrypt", "Connect"]
 EDchoice=buttonbox(msg=msg1, title="EZ-Encrypt",choices=choices1, image="sp.gif")
 
 if EDchoice=="Encrypt":
@@ -63,3 +69,20 @@ elif EDchoice=="Decrypt":
     decrypt_file(SecretKey, fte, OutputFNAME)
     
     msgbox(msg="Operation Successful", title="File Decryption Complete")
+    
+elif EDchoice=="Connect":
+    url_login='http://127.0.0.1:8000/login/'
+    msg = "Please Enter Your Credentials"
+    title= "Log in and Connect"
+    fieldNames = ["Username", "Password"]
+    #loginValues = multenterbox(msg,title, fieldNames)
+    loginValues = ['hamby', 'password']
+    url_list='http://127.0.0.1:8000/profile'
+    with requests.session() as client:
+        client.get(url_login, verify=False)
+        csrftoken=client.cookies['csrftoken']
+        payload = {'username': loginValues[0], 'password':loginValues[1],'csrfmiddlewaretoken':csrftoken}
+        r0 = client.post(url_login, data=payload, verify=False)
+        r1 = client.get(url_list, verify=False)
+        c=r1.text
+        print(c)
