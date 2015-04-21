@@ -6,6 +6,7 @@ class ReportForm(forms.Form):
 	long_des = forms.CharField(label='Description', widget = forms.Textarea)
 	location = forms.CharField(label='Location', required=False)
 	date = forms.DateField(label='Date of Occurrence',initial=datetime.date.today,required=False)
+	keywords = forms.CharField(label='Keywords (separate with commas):',widget=forms.Textarea)
 	public = forms.BooleanField(label='Public',widget=forms.CheckboxInput,required=False,initial=False)
 
 class FolderForm(forms.Form):

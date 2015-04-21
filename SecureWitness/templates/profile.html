@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title> Profile View</title>	
+		<title>{{user.username}}</title>	
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -64,9 +64,43 @@ User Profile</div>
             {% endfor %}
 			
             </ul>
-            
-		{% else %}
-			<p>No reports submitted.</p>
+		{% endif %}
+		{% if reports2 %}
+			<p>Reports</p>
+			<ul>
+			{% for report, files in rep_dict2.items %}
+				<a href = "{% url 'SecureWitness.views.report_view' report_id=report.id%}">
+                {{ report.short_des }}</li></a> 
+                <li><b>Submitted by User: </b>{{ report.owner }}</li>
+                <li><b>Summary: </b>{{ report.long_des }}</li>
+                <li><b>Location: </b>{{ report.location }}</li>
+                <li><b>Date of Incident: </b>{{ report.incident_date }}</li>
+				<li><b>Summary: </b>{{ report.long_des }}</li>
+                <li><b>Security Level: </b>
+                {% if report.public %}
+                Public
+                {% else %}
+                Private
+                {% endif %}
+                </li>
+                {%if file in files%}
+                Files Assiociated With Report:
+                {%endif%}
+                <ul>
+					{% for file in files %}
+					<li>
+						{{ file }}
+					</li>
+					{% endfor %}
+					</ul>
+				
+			<br>
+            {% endfor %}
+			
+            </ul>
+		{% endif %}
+		{% if not reports and not reports2 %}
+			<p>No report access</p>
 		{% endif %}
 		{% if folders %}
 			<br><br>

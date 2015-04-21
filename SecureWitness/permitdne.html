@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>DNE</title>	
+	</head>
+
+ 	<body>
+ 		<p>That group or user does not exist</p>
+		<a href="{% url 'SecureWitness.views.profile' %}"><button>Return to Profile?</button></a><br><br>
+		<a href="{% url 'SecureWitness.views.grantpermissions' report_id=report.id %}"><button>Try Again?</button></a><br><br>
+	</body>
+</html>

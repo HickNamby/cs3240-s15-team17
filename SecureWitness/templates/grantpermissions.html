@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Grant Permissions</title>	
+	</head>
+
+ 	<body>
+		<!--List of uploaded documents-->
+		{% if report %}
+			<p>You are editting permissions for report [{{report.short_des }}]</p>
+			<form action="{% url 'SecureWitness.views.grantpermissions' report_id=report.id %}" method="post">
+				{% csrf_token %}
+				Person or Group Name: <input type="text" name="topermit"><br>
+				<input type="submit" value = "Grant" />
+			</form>
+		{% else %}
+			<p> That is not a valid report.</p>
+		{% endif %}
+	</body>
+</html>

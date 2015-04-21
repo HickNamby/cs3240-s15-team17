@@ -45,11 +45,19 @@ def submit(request):
 @login_required
 def profile(request):
 	rep_dict={}
-	reports = Report.objects.filter(owner=request.user)
+	rep_dict2={}
+	groups = request.user.groups.all()
+	reports = set()
+	for group in groups:
+		for rep in group.report_set.all():
+			reports.add(rep)
+	reports2 = (Report.objects.filter(owner=request.user) | Report.objects.filter(userviewers__username=request.user.username))
 	for report in reports:
 		rep_dict[report]= report.file_set.all()
+	for report in reports2:
+		rep_dict2[report]= report.file_set.all()
 	folders = Folder.objects.filter(owner=request.user)
-	return render(request, 'profile.html', {'reports':reports,'rep_dict':rep_dict,'folders':folders},context_instance=RequestContext(request))
+	return render(request, 'profile.html', {'reports':reports,'reports2':reports2,'rep_dict':rep_dict,'rep_dict2':rep_dict2,'folders':folders,'crntuser':request.user},context_instance=RequestContext(request))
 
 def custom_proc(request):
     return {
@@ -72,7 +80,6 @@ def createfolder(request):
 				fol.ofolder.add(newFol)
 				fol.save()
 				newFol.save()
-				print('adding folder')
 		return redirect('SecureWitness.views.profile')
 	else:
 		form = FolderForm()
@@ -131,8 +138,26 @@ def editfolder(request,folder_id):
 	return render(request,'editfolder.html',context)
 
 @login_required
+def grantpermissions(request, report_id):
+	report = get_object_or_404(Report,pk=report_id)
+	if not report.canview(request.user):
+		return HttpResponse("You cannot grant permissions for this report")
+	if request.method == 'POST':
+		if Group.objects.filter(name=request.POST['topermit']).exists():
+			report.groupviewers.add(Group.objects.get(name=request.POST['topermit']))
+		elif SiteUser.objects.filter(username=request.POST['topermit']).exists():
+			report.userviewers.add(SiteUser.objects.get(username=request.POST['topermit']))
+		else:
+			return render(request, 'permitdne.html',{'report':report})
+		return redirect('SecureWitness.views.profile')
+	else:
+		return render(request, 'grantpermissions.html', {'report':report})
+
+@login_required
 def report_view(request, report_id, file_id=-1):
 	report = get_object_or_404(Report,pk=report_id)
+	if not report.canview(request.user):
+		return HttpResponse("You cannot view this report")
 	file_dict = {}
 	if request.method == 'POST':
 		report.delete()
@@ -145,11 +170,13 @@ def report_view(request, report_id, file_id=-1):
 		return response
 	for f in report.file_set.all():
 		file_dict[f] = f.docfile.url.split('/')[-1]
-	return render(request, 'report.html', {'report':report,'file_dict':file_dict})
+	return render(request, 'report.html', {'report':report,'file_dict':file_dict,'crntuser':request.user})
 
 @login_required
 def folder_view(request,folder_id):
 	folder = get_object_or_404(Folder,pk=folder_id)
+	if not (folder.owner == request.user):
+		return HttpResponse("You cannot view with folder.")
 	rep_dict = {}
 	fol_dict = {}
 	if request.method == 'POST':

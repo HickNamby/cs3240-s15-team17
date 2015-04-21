@@ -22,11 +22,14 @@
 				</li>
 			{% endfor %}
 			</ul>
-			<a href="{% url 'SecureWitness.views.editreport' report_id=report.id %}"><button>Edit?</button></a><br><br>
-			<form action="{% url 'SecureWitness.views.report_view' report_id=report.id file_id=0%}" method="post">
-				{% csrf_token %}
-				<input type="submit" value = "Delete?" />
-			</form>
+			{% if report.owner.username == crntuser.username %}
+				<a href="{% url 'SecureWitness.views.editreport' report_id=report.id %}"><button>Edit?</button></a><br><br>
+				<a href="{% url 'SecureWitness.views.grantpermissions' report_id=report.id %}"><button>Grant Permissions?</button></a><br><br>
+				<form action="{% url 'SecureWitness.views.report_view' report_id=report.id file_id=0%}" method="post">
+					{% csrf_token %}
+					<input type="submit" value = "Delete?" />
+				</form>
+			{% endif %}
 		{% else %}
 			<p> That is not a valid report.</p>
 		{% endif %}
