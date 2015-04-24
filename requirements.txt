@@ -5,3 +5,6 @@ django-toolbelt==0.0.1
 gunicorn==19.3.0
 pycrypto==2.6.1
 psycopg2==2.5.1
+django-bootstrap3
+easygui
+requests
