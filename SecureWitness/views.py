@@ -122,6 +122,7 @@ def editreport(request,report_id):
 			report.long_des=request.POST['long_des']
 			report.location=request.POST['location']
 			report.incident_date=request.POST['date']
+			report.keywords=request.POST['keywords']
 			report.public=request.POST.get('public',False)
 			report.save()
 			if request.FILES:
@@ -130,7 +131,7 @@ def editreport(request,report_id):
 					report.save()
 			return redirect('SecureWitness.views.profile')
 	else:
-		form = ReportForm(initial={'short_des':report.short_des,'long_des':report.long_des,'location':report.location,'date':report.incident_date,'public':report.public})
+		form = ReportForm(initial={'short_des':report.short_des,'long_des':report.long_des,'location':report.location,'date':report.incident_date,'keywords':report.keywords,'public':report.public})
 	context={'report':report,'form':form}
 	return render(request,'editreport.html',context)
 
