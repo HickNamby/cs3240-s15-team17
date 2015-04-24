@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SecureWitness',
-    #'bootstrap3',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,3 +110,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

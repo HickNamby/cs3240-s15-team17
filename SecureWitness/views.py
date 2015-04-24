@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.template.response import TemplateResponse
+from django.core.mail import send_mail
 import os
 
 from SecureWitness.models import Report, File, Folder
@@ -211,6 +212,13 @@ def register(request):
         if user_form.is_valid():
             user = SiteUser.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
             user.save()
+            subject = "Thank you for Registering"
+            msg = """
+            	Thank you for creating your account with SecureWitness.
+            	We hope you enjoy your safe and secure stay, %s
+            """ % user.username
+            print (msg)
+            send_mail(subject,msg, "Secure Witness <securewitness17@gmail.com>",[user.email],fail_silently=False,auth_user="securewitness17@gmail.com",auth_password="serverpassword")
             registered = True
         else:
             print(user_form.errors)
