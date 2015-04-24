@@ -19,3 +19,8 @@ class UserForm(forms.Form):
 
 class GroupForm(forms.Form):
     name = forms.CharField(max_length=50)
+
+class AddUserForm(forms.Form):
+    groupname = forms.CharField(max_length=200)
+    username = forms.CharField(max_length=200)
+

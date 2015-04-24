@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from SecureWitness.models import SiteUser
-from SecureWitness.forms import UserForm, FolderForm, GroupForm
+from SecureWitness.forms import UserForm, FolderForm, GroupForm, AddUserForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
@@ -268,3 +268,23 @@ def create_group(request):
         group_form = GroupForm()
 
     return render(request, 'creategroup.html', {'group_from' : group_form})
+
+@login_required()
+def add_user_to_group(request):
+
+    if request.method == 'POST':
+        add_user_form = AddUserForm(data=request.POST)
+
+        if add_user_form.is_valid():
+            user = SiteUser.objects.get(username=request.POST.get('username'))
+            group = Group.objects.get(name=request.POST.get('groupname'))
+            if (group in user.group_set_all()):
+                group.user_set.add(user)
+
+        else:
+            print(add_user_form.errors)
+        return redirect('SecureWitness.views.add_user_to_group')
+    else:
+        add_user_form = AddUserForm()
+
+    return render(request,'addusertogroup.html',{'add_user_form' : add_user_form})
