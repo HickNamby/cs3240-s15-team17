@@ -38,6 +38,7 @@ margin-left: 70px;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  margin-left: 20px;	
 }
 
 .btn:hover {
@@ -48,6 +49,7 @@ margin-left: 70px;
   background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
+margin-left: 20px;
 }
 
 <style>
@@ -71,6 +73,8 @@ text-align:left;
 font-size:25;
 font-family:times;
 float:center;
+padding: 50px 50px;
+
 }
 #nav {
     font-size:16;
@@ -80,7 +84,7 @@ float:center;
     width:100px;
     height:1000px;
     float:left;
-    padding:5px; 
+    padding:5px;
 }
 #section {
     width:350px;
