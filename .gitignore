@@ -4,4 +4,8 @@
 build/
 dist/
 __pycache__/
+<<<<<<< HEAD
+.DS_Store/
+SecureWitness/.DS_Store
+SecureWitness/.idea/*
 .idea

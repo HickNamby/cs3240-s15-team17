@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<title>Search Page</title>
+<html>
+<form action="{% url "SecureWitness.views.search" %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<!--you were looking at the submit forms page. To get the text from the search box on the search page -->
+<h2>Enter text to search reports.</h2>
+
+
+ <p>{{ form.searchText.label_tag }} {{ form.searchText }} {{ form.searchText.help_text }} {{ form.searchText.errors }}
+<input type="submit" value="Submit" />
+ </p>
+    </form>
+</html>
