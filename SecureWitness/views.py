@@ -59,6 +59,15 @@ def profile(request):
 	folders = Folder.objects.filter(owner=request.user)
 	return render(request, 'profile.html', {'reports':reports,'reports2':reports2,'rep_dict':rep_dict,'rep_dict2':rep_dict2,'folders':folders,'crntuser':request.user},context_instance=RequestContext(request))
 
+@login_required
+def remote_profile(request):
+    rep_dict={}
+    reports = Report.objects.filter(owner=request.user)
+    for report in reports:
+        rep_dict[report]= report.file_set.all()
+    folders = Folder.objects.filter(owner=request.user)
+    return render(request, 'remoteAccessProfile.html',{'reports':reports,'rep_dict':rep_dict,'folders':folders},context_instance=RequestContext(request))
+
 def custom_proc(request):
     return {
         'dictionary': request.reports

@@ -11,11 +11,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.template.response import TemplateResponse
 import requests
-
+import urllib.request
 msg1="Would You Like to Encrypt or Decrypt a File?"
 choices1=["Encrypt", "Decrypt", "Connect"]
 EDchoice=buttonbox(msg=msg1, title="EZ-Encrypt",choices=choices1, image="sp.gif")
-
+base_url='http://securewitness17.herokuapp.com'
+#base_url='http://127.0.0.1:8000'
 if EDchoice=="Encrypt":
     # print("herp")
     # msgbox(msg="Choose a file to encrypt", title="Encryption in progress")
@@ -71,13 +72,14 @@ elif EDchoice=="Decrypt":
     msgbox(msg="Operation Successful", title="File Decryption Complete")
     
 elif EDchoice=="Connect":
-    url_login='http://127.0.0.1:8000/login/'
+    url_login=base_url+'/login/'
     msg = "Please Enter Your Credentials"
     title= "Log in and Connect"
     fieldNames = ["Username", "Password"]
-    #loginValues = multenterbox(msg,title, fieldNames)
-    loginValues = ['hamby', 'password']
-    url_list='http://127.0.0.1:8000/profile'
+    loginValues = multenterbox(msg,title, fieldNames)
+    #loginValues = ['hamby', 'password']
+    url_list=base_url+'/remoteprofile'
+    file_url=base_url+'/report/'
     with requests.session() as client:
         client.get(url_login, verify=False)
         csrftoken=client.cookies['csrftoken']
@@ -85,4 +87,16 @@ elif EDchoice=="Connect":
         r0 = client.post(url_login, data=payload, verify=False)
         r1 = client.get(url_list, verify=False)
         c=r1.text
-        print(c)
+        textbox(msg="Note Any Report and File IDs if You Want to Download Anything", title='Report List', text=c)
+        msg="Please Enter The Following"
+        title="dJanky-ass File Download App"
+        fileStuff=["Report ID", "File ID", "Desired Local File Name w/ Extension"]
+        fileValues = multenterbox(msg,title, fileStuff)
+        payload2={'report_id':fileValues[0], 'file_id':fileValues[1]}
+        file_url=file_url+fileValues[0]+'/'+fileValues[1]
+        print(file_url)
+        chunk_size=512
+        DLfile = client.get(file_url, stream=True, verify=False)
+        with open(fileValues[2], 'wb') as fd:
+            for chunk in DLfile.iter_content(chunk_size):
+                fd.write(chunk)
