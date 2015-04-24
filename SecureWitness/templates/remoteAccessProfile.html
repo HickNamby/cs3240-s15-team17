@@ -1,4 +1,5 @@
-User Profile: {{user}}
+{{load staticfiles}}
+User Profile: {{user.username}}, {{user}}
 {% if reports %}
 	{% for report, files in rep_dict.items %}
         Report ID: {{ report.id }}
