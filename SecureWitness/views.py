@@ -290,7 +290,7 @@ def search(request):
 
         if form.is_valid():
             searchText = form.cleaned_data['searchText']
-            foundReports = searching(searchText)
+            foundReports = searching(searchText, request.user)
             return render(request, 'results.html', {'reports': foundReports})
     else:
         form = SearchForm()
