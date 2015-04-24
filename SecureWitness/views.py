@@ -53,6 +53,9 @@ def profile(request):
 		for rep in group.report_set.all():
 			reports.add(rep)
 	reports2 = (Report.objects.filter(owner=request.user) | Report.objects.filter(userviewers__username=request.user.username))
+	for report in reports2:
+		if report in reports:
+			reports.remove(report)
 	for report in reports:
 		rep_dict[report]= report.file_set.all()
 	for report in reports2:
@@ -276,10 +279,10 @@ def add_user_to_group(request):
         add_user_form = AddUserForm(data=request.POST)
 
         if add_user_form.is_valid():
-            user = SiteUser.objects.get(username=request.POST.get('username'))
+            user_to_add = SiteUser.objects.get(username=request.POST.get('username'))
             group = Group.objects.get(name=request.POST.get('groupname'))
-            if (group in user.group_set_all()):
-                group.user_set.add(user)
+            if (request.user in group.user_set.all()):
+                group.user_set.add(user_to_add)
 
         else:
             print(add_user_form.errors)
