@@ -1,15 +1,13 @@
 from django.db import models
-<<<<<<< HEAD
 from django.db.models.signals import pre_delete,post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin, Group, Permission
-=======
 from django.db.models.signals import pre_delete, post_delete
 from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group
 from django.db.models import Q
 import copy
->>>>>>> a140bda8d73c46eba58894ac1199fd6ea3f287fe
+
 
 import os
 
