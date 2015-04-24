@@ -1,5 +1,35 @@
-{{load staticfiles}}
 User Profile: {{user.username}}, {{user}}
+{% if reports2 %}
+	{% for report, files in rep_dict2.items %}
+        Report ID: {{ report.id }}
+        Title: {{ report.short_des }} 
+        Submitted by User: {{ report.owner }}
+        Summary: {{ report.long_des }}
+        Location: {{ report.location }}
+        Date of Incident: {{ report.incident_date }}
+        Security Level: 
+        {% if report.public %}
+            Public
+        {% else %}
+            Private
+        {% endif %}
+        Files Assiociated With Report:
+  		{% for file in files %}
+            File ID: {{ file.id }}
+            Name: {{ file }}
+		{% endfor %}
+    {% endfor %}
+{% else %}
+	No reports submitted.
+{% endif %}
+
+{% if folders %}
+	Folders
+	{% for folder in folders %}
+		{{ folder.title }}
+	{% endfor %}
+{% endif %}
+Other Reports You Have Permission For:
 {% if reports %}
 	{% for report, files in rep_dict.items %}
         Report ID: {{ report.id }}

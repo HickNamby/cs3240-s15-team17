@@ -50,7 +50,7 @@ User Profile</div>
                 {% endif %}
                 </li>
                 {%if file in files%}
-                Files Assiociated With Report:
+                Files Associated With Report:
                 {%endif%}
                 <ul>
 					{% for file in files %}
@@ -72,7 +72,7 @@ User Profile</div>
 				<a href = "{% url 'SecureWitness.views.report_view' report_id=report.id%}">
                 {{ report.short_des }}</li></a> 
                 <li><b>Submitted by User: </b>{{ report.owner }}</li>
-                <li><b>Summary: </b>{{ report.long_des }}</li>
+                <li><b>Title: </b>{{ report.long_des }}</li>
                 <li><b>Location: </b>{{ report.location }}</li>
                 <li><b>Date of Incident: </b>{{ report.incident_date }}</li>
 				<li><b>Summary: </b>{{ report.long_des }}</li>
