@@ -10,9 +10,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.template.response import TemplateResponse
 from django.core.mail import send_mail
+from SecureWitness.forms import SearchForm
+from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
 import os
 
-from SecureWitness.models import Report, File, Folder
+from SecureWitness.models import Report, File, Folder, searching
 from SecureWitness.forms import ReportForm
 
 
@@ -268,3 +271,25 @@ def create_group(request):
         group_form = GroupForm()
 
     return render(request, 'creategroup.html', {'group_from' : group_form})
+
+class SearchListView(ListView):
+    model = SearchForm
+
+
+
+
+
+def search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+
+        if form.is_valid():
+            searchText = form.cleaned_data['searchText']
+            foundReports = searching(searchText)
+            return render(request, 'results.html', {'reports': foundReports})
+    else:
+        form = SearchForm()
+        return render(request, 'search.html', {'form': form, })
+
+def results(request):
+    return render(request, 'results.html')

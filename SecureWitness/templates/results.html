@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<title>Search Page</title>
+<html>
+<form action="{% url "SecureWitness.views.results" %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<!--you were looking at the submit forms page. To get the text from the search box on the search page -->
+
+    {% if reports%}
+
+    <h2>Reports Found</h2>
+    {% for report in reports %}
+        <ul>
+    <li> <a href = "{% url 'SecureWitness.views.report_view' report_id=report.id%}"> {{ report.header }}</a> <br>
+
+        </ul>
+{% endfor %}
+    {% else %}
+        <h3>No Reports were found</h3>
+{% endif %}
+  <div id="nav">
+       <br> <a href="{% url 'SecureWitness.views.search' %}">Search Again?</a><br>
+        </div>
+</form>
+</html>
