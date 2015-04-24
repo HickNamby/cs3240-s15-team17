@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Edit Folder</title>	
+	</head>
+
+	<body>
+		<form action="{% url "SecureWitness.views.editfolder" folder_id=folder.id %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			Title<input type="text" name="title" value="{{folder.title}}"><br>
+			{% if reports %}
+				Add reports?<br>
+				{% for report in reports %}
+					{% if report in rep_set %}
+						<input type="checkbox" name="r_{{report.id}}" checked/>{{report.short_des}}<br>
+					{% else %}
+						<input type="checkbox" name="r_{{report.id}}"/>{{report.short_des}}<br>
+					{% endif %}					
+				{% endfor %}
+			{% endif %}
+			{% if folders %}
+				Add folders?<br>
+				{% for folder in folders %}
+					{% if folder in fol_set %}
+						<input type="checkbox" name="f_{{folder.id}}" checked/>{{folder.title}}<br>
+					{% else %}
+						<input type="checkbox" name="f_{{folder.id}}"/>{{folder.title}}<br>
+					{% endif %}	
+				{% endfor %}
+			{% endif %}
+			<p><input type="submit" value="Finish" /></p>
+		</form>
+	</body>
+</html> 
