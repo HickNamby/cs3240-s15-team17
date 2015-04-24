@@ -1,7 +1,7 @@
 from django.contrib.admin.sites import AdminSite
 from SecureWitness.models import SiteUser
 from django.contrib.auth.models import Group
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin, admin
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -67,11 +67,12 @@ class SiteUserAdmin(UserAdmin):
     list_filter = ('is_superuser',)
 
     fieldsets = (
-        (None,{'fields':('username','email','password')}),('Permissions',{'fields':('is_active','is_admin_user','groups','user_permissions')})
+        (None,{'fields':('username','email','password')}),('Permissions',{'fields':('is_active','is_admin_user','groups')})
     )
 
+class SiteGroupAdmin(admin.ModelAdmin):
 
-
+    readonly_fields = ['permissions']
 
 user_admin.register(SiteUser,SiteUserAdmin)
-user_admin.register(Group)
+user_admin.register(Group,SiteGroupAdmin)

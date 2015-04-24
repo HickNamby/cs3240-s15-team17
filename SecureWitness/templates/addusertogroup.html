@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SecureWitness</title>
+    </head>
+
+    <body>
+        <h1>Add User to Group</h1>
+
+        <form id="add_user_form" method="post" action="/addusertogroup/">
+            {% csrf_token %}
+            Group name: <input type="text" name="groupname" value="" size="50" />
+            Username:   <input type="text" name="username" value="" size="50" />
+            <br />
+
+            <input type="submit" value="submit" />
+        </form>
+
+    </body>
+</html>
