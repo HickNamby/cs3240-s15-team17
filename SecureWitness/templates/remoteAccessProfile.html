@@ -1,7 +1,6 @@
-{{load staticfiles}}
 User Profile: {{user.username}}, {{user}}
-{% if reports %}
-	{% for report, files in rep_dict.items %}
+{% if reports2 %}
+	{% for report, files in rep_dict2.items %}
         Report ID: {{ report.id }}
         Title: {{ report.short_des }} 
         Submitted by User: {{ report.owner }}
