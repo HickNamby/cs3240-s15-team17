@@ -25,5 +25,6 @@ urlpatterns = patterns('',
     url(r'^creategroup/$','SecureWitness.views.create_group'),
     url(r'^search', 'SecureWitness.views.search'),
     url(r'^results', 'SecureWitness.views.results'),
+    url(r'^addusertogroup/$','SecureWitness.views.add_user_to_group'),
     url(r'^', 'SecureWitness.views.home'),
 )
