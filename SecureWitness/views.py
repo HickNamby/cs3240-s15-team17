@@ -62,12 +62,20 @@ def profile(request):
 
 @login_required
 def remote_profile(request):
-    rep_dict={}
-    reports = Report.objects.filter(owner=request.user)
-    for report in reports:
-        rep_dict[report]= report.file_set.all()
-    folders = Folder.objects.filter(owner=request.user)
-    return render(request, 'remoteAccessProfile.html',{'reports':reports,'rep_dict':rep_dict,'folders':folders},context_instance=RequestContext(request))
+	rep_dict={}
+	rep_dict2={}
+	groups = request.user.groups.all()
+	reports = set()
+	for group in groups:
+		for rep in group.report_set.all():
+			reports.add(rep)
+	reports2 = (Report.objects.filter(owner=request.user) | Report.objects.filter(userviewers__username=request.user.username))
+	for report in reports:
+		rep_dict[report]= report.file_set.all()
+	for report in reports2:
+		rep_dict2[report]= report.file_set.all()
+	folders = Folder.objects.filter(owner=request.user)
+	return render(request, 'remoteAccessProfile.html', {'reports':reports,'reports2':reports2,'rep_dict':rep_dict,'rep_dict2':rep_dict2,'folders':folders,'crntuser':request.user},context_instance=RequestContext(request))
 
 def custom_proc(request):
     return {
