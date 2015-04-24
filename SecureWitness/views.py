@@ -10,9 +10,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.template.response import TemplateResponse
 from django.core.mail import send_mail
+from SecureWitness.forms import SearchForm
+from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
 import os
 
-from SecureWitness.models import Report, File, Folder
+from SecureWitness.models import Report, File, Folder, searching
 from SecureWitness.forms import ReportForm
 
 
@@ -53,6 +56,9 @@ def profile(request):
 		for rep in group.report_set.all():
 			reports.add(rep)
 	reports2 = (Report.objects.filter(owner=request.user) | Report.objects.filter(userviewers__username=request.user.username))
+	for report in reports2:
+		if report in reports:
+			reports.remove(report)
 	for report in reports:
 		rep_dict[report]= report.file_set.all()
 	for report in reports2:
@@ -269,6 +275,29 @@ def create_group(request):
 
     return render(request, 'creategroup.html', {'group_from' : group_form})
 
+
+class SearchListView(ListView):
+    model = SearchForm
+
+
+
+
+
+def search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+
+        if form.is_valid():
+            searchText = form.cleaned_data['searchText']
+            foundReports = searching(searchText)
+            return render(request, 'results.html', {'reports': foundReports})
+    else:
+        form = SearchForm()
+        return render(request, 'search.html', {'form': form, })
+
+def results(request):
+    return render(request, 'results.html')
+
 @login_required()
 def add_user_to_group(request):
 
@@ -276,10 +305,10 @@ def add_user_to_group(request):
         add_user_form = AddUserForm(data=request.POST)
 
         if add_user_form.is_valid():
-            user = SiteUser.objects.get(username=request.POST.get('username'))
+            user_to_add = SiteUser.objects.get(username=request.POST.get('username'))
             group = Group.objects.get(name=request.POST.get('groupname'))
-            if (group in user.group_set_all()):
-                group.user_set.add(user)
+            if (request.user in group.user_set.all()):
+                group.user_set.add(user_to_add)
 
         else:
             print(add_user_form.errors)
@@ -288,3 +317,4 @@ def add_user_to_group(request):
         add_user_form = AddUserForm()
 
     return render(request,'addusertogroup.html',{'add_user_form' : add_user_form})
+
