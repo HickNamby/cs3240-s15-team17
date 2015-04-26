@@ -1,9 +1,13 @@
 from django.db import models
+from django.db.models.signals import pre_delete,post_delete, post_save
+from django.dispatch.dispatcher import receiver
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin, Group, Permission
 from django.db.models.signals import pre_delete, post_delete
 from django.dispatch.dispatcher import receiver
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group
 from django.db.models import Q
 import copy
+
 
 import os
 
@@ -93,6 +97,18 @@ class File(models.Model):
     def __str__(self):
         return self.docfile.url
 
+
+
+@receiver(post_save, sender=SiteUser)
+def update_permission(sender,instance,**kwargs):
+    p1 = Permission.objects.get(codename='add_group')
+    p2 = Permission.objects.get(codename='change_siteuser')
+    if instance.is_admin_user:
+        instance.user_permissions.add(p1)
+        instance.user_permissions.add(p2)
+    if not instance.is_admin_user:
+        instance.user_permissions.remove(p1)
+        instance.user_permissions.remove(p2)
 
 @receiver(pre_delete, sender=File)
 def file_delete(sender, instance, **kwargs):
