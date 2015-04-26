@@ -31,8 +31,10 @@ User Profile</div>
 		<!--List of uploaded documents-->
 		<a class='btn' href='{% url "SecureWitness.views.submit" %}'>Submit Report</a><br><br>
 		<a class='btn' href='{% url "SecureWitness.views.createfolder" %}'>Create Folder</a>
+		{% if reports or reports2 %}
+		<p>Reports</p>
+		{% endif %}
 		{% if reports %}
-			<p>Reports</p>
 			<ul>
 			{% for report, files in rep_dict.items %}
 				<a href = "{% url 'SecureWitness.views.report_view' report_id=report.id%}">
@@ -66,7 +68,6 @@ User Profile</div>
             </ul>
 		{% endif %}
 		{% if reports2 %}
-			<p>Reports</p>
 			<ul>
 			{% for report, files in rep_dict2.items %}
 				<a href = "{% url 'SecureWitness.views.report_view' report_id=report.id%}">

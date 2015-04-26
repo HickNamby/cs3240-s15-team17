@@ -14,8 +14,8 @@ from SecureWitness.forms import SearchForm
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
 import os
-
-from SecureWitness.models import Report, File, Folder, searching
+import copy
+from SecureWitness.models import Report, File, Folder
 from SecureWitness.forms import ReportForm
 
 
@@ -298,6 +298,19 @@ def search(request):
 
 def results(request):
     return render(request, 'results.html')
+
+
+def searching(find, user):
+    report_set = set
+    # try:
+    looking = Report.objects.filter(short_des__contains=find) | Report.objects.filter(long_des__contains=find) | Report.objects.filter(location__contains=find) | Report.objects.filter(keywords__contains=find)
+    userfind = SiteUser.objects.filter(username=find)
+    if userfind:
+	    looking = looking | Report.objects.filter(owner=userfind)
+    for report in copy.deepcopy(looking):
+        if not report.canview(user):
+            looking.remove(report)
+    return looking
 
 @login_required()
 def add_user_to_group(request):

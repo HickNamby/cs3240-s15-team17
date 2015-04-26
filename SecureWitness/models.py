@@ -83,8 +83,7 @@ class Report(models.Model):
         return False
 
     def header(self):
-        return self.owner.username + " " + self.short_des + " " + self.long_des + " " + self.location + " " + str(
-            self.incident_date) + " " + str(self.timestamp) + " " + str(self.public)
+        return self.short_des + " by " + self.owner.username
 
 
 class File(models.Model):
@@ -100,17 +99,3 @@ def file_delete(sender, instance, **kwargs):
     if instance.docfile:
         if os.path.isfile(instance.docfile.path):
             os.remove(instance.docfile.path)
-
-
-def searching(find, user):
-    report_set = set
-    # try:
-    looking = Report.objects.filter(
-        Q(reporter__icontains=find) | Q(short_des__icontains=find) | Q(long_des__icontains=find) | Q(
-            location__icontains=find) | Q(incident_date__icontains=find) | Q(timestamp__icontains=find) | Q(
-            keywords__icontains=find)).filter(
-        public=True)
-    for report in copy.deepcopy(looking):
-        if not report.canview(user):
-            looking.remove(report)
-    return looking
