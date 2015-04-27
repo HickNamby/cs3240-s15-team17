@@ -248,7 +248,6 @@ def register(request):
             	Thank you for creating your account with SecureWitness.
             	We hope you enjoy your safe and secure stay, %s
             """ % user.username
-            print (msg)
             send_mail(subject,msg, "Secure Witness <securewitness17@gmail.com>",[user.email],fail_silently=False,auth_user="securewitness17@gmail.com",auth_password="serverpassword")
             registered = True
         else:
