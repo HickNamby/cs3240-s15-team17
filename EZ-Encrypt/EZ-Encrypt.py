@@ -76,7 +76,7 @@ elif EDchoice=="Connect":
     msg = "Please Enter Your Credentials"
     title= "Log in and Connect"
     fieldNames = ["Username", "Password"]
-    loginValues = multenterbox(msg,title, fieldNames)
+    loginValues = multpasswordbox(msg,title, fieldNames)
     #loginValues = ['hamby', 'password']
     url_list=base_url+'/remoteprofile'
     file_url=base_url+'/report/'
