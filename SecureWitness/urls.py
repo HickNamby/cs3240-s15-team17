@@ -26,5 +26,7 @@ urlpatterns = patterns('',
     url(r'^search', 'SecureWitness.views.search'),
     url(r'^results', 'SecureWitness.views.results'),
     url(r'^addusertogroup/$','SecureWitness.views.add_user_to_group'),
+    url(r'^dzip/$','SecureWitness.views.downloadstandalonezip'),
+    url(r'^dtar/$','SecureWitness.views.downloadstandalonetar'),
     url(r'^', 'SecureWitness.views.home'),
 )

@@ -13,10 +13,12 @@ from django.core.mail import send_mail
 from SecureWitness.forms import SearchForm
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
+from django.conf import settings
 import os
 import copy
 from SecureWitness.models import Report, File, Folder
 from SecureWitness.forms import ReportForm
+from django.core.servers.basehttp import FileWrapper
 
 
 def index(request):
@@ -24,6 +26,20 @@ def index(request):
 
 def home(request):
     return render_to_response('home.html')
+
+def downloadstandalonezip(request):
+	f = open(os.path.join(settings.BASE_DIR,"..","EZ-Encrypt","EZ-Encrypt.zip"),'rb')
+	response = HttpResponse(f,content_type='application/zip')
+	display = "EZ-Encrypt.zip"
+	response['Content-Disposition']='attachment; filename=%s' % str(display)
+	return response
+
+def downloadstandalonetar(request):
+	f = open(os.path.join(settings.BASE_DIR,"..","EZ-Encrypt","EZ-Encrypt.tar.gz"),'rb')
+	response = HttpResponse(f,content_type='application/x-tar')
+	display = "EZ-Encrypt.tar.gz"
+	response['Content-Disposition']='attachment; filename=%s' % str(display)
+	return response
 
 @login_required
 def submit(request):
