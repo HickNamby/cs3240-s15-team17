@@ -66,6 +66,12 @@ class SiteUserAdmin(UserAdmin):
     list_display = ('username','email',)
     list_filter = ('is_superuser',)
 
+    def get_queryset(self, request):
+        qs = super(SiteUserAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(is_superuser=False)
+
     fieldsets = (
         (None,{'fields':('username','email','password')}),('Permissions',{'fields':('is_active','is_admin_user','groups')})
     )
