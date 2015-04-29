@@ -73,8 +73,10 @@ class SiteUserAdmin(UserAdmin):
         return qs.filter(is_superuser=False)
 
     fieldsets = (
-        (None,{'fields':('username','email','password')}),('Permissions',{'fields':('is_active','is_admin_user','groups')})
+        (None,{'fields':('username','email')}),('Permissions',{'fields':('is_active','is_admin_user','groups')})
     )
+
+    readonly_fields = ['username','email']
 
 class SiteGroupAdmin(admin.ModelAdmin):
 
