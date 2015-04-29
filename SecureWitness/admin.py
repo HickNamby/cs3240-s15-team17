@@ -38,9 +38,9 @@ class UserChangeForm(forms.ModelForm):
         model = SiteUser
         fields = ('email', 'password', 'is_active')
 
-    def clean_password(self):
+    # def clean_password(self):
 
-        return self.initial["password"]
+    #     return self.initial["password"]
 
 
 class SiteUserAdmin(UserAdmin):

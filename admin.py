@@ -53,11 +53,11 @@ class UserChangeForm(forms.ModelForm):
         model = SiteUser
         fields = ('email', 'password', 'is_active')
 
-    def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-        return self.initial["password"]
+    # def clean_password(self):
+    #     # Regardless of what the user provides, return the initial value.
+    #     # This is done here, rather than on the field, because the
+    #     # field does not have access to the initial value
+    #     return self.initial["password"]
 
 class SiteUserAdmin(UserAdmin):
     form = UserChangeForm
