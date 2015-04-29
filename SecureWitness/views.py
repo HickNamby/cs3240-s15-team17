@@ -324,7 +324,7 @@ def searching(find, user):
 	    looking = looking | Report.objects.filter(owner=userfind)
     for report in copy.deepcopy(looking):
         if not report.canview(user):
-            looking.remove(report)
+            looking = looking.exclude(id=report.id)
     return looking
 
 @login_required()
